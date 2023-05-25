@@ -14,14 +14,15 @@ labels = open(labelsPath).read().strip().split('\n')
 
 yoloNetwork = cv2.dnn.readNetFromDarknet(modelConfiguration, modelWeights)
 
-# Read the input video file
-video = cv2.VideoCapture("car.mp4")
+# Read the input video file instead of an image
+video = cv2.VideoCapture("car10.mp4")
 
 
 # Define infinite while loop
 while True:
     # Read the first frame of the video
     check, image = video.read()
+    # Run the code only if the video frame is read successfully i.e value of check is True
     if check:
         image = cv2.resize(image, (0, 0), fx=1, fy=1)
         dimensions = image.shape[:2]
@@ -65,6 +66,7 @@ while True:
                     cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
 
         cv2.imshow('Detect The Car', image)
+        # Change waitKey to 1
         cv2.waitKey(1)
 
     # Quit the display window when the spacebar key is pressed
